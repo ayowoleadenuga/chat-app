@@ -1,23 +1,23 @@
 "use client";
 
-import { LoginForm } from "@/components/auth/login-form";
+import { ChatLayout } from "@/components/chat/layout/chat-layout";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/providers/auth";
 
-export default function LoginPage() {
+export default function ChatPage() {
   const { isAuthenticated } = useAuthContext();
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      router.replace("/chat");
+    if (!isAuthenticated) {
+      router.replace("/");
     }
   }, [isAuthenticated, router]);
 
-  return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <LoginForm />
-    </div>
-  );
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  return <ChatLayout />;
 }

@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  username  String    @unique
+  createdAt DateTime  @default(now())
+  messages  Message[]
+  reactions Reaction[]
+  rooms     UserRoom[]
+}
+
+model ChatRoom {
+  id        String    @id @default(cuid())
+  name      String
+  createdAt DateTime  @default(now())
+  messages  Message[]
+  users     UserRoom[]
+}
+
+model UserRoom {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  room      ChatRoom @relation(fields: [roomId], references: [id])
+  roomId    String
+  joinedAt  DateTime @default(now())
+
+  @@unique([userId, roomId])
+}
+
+model Message {
+  id        String     @id @default(cuid())
+  content   String
+  createdAt DateTime   @default(now())
+  user      User       @relation(fields: [userId], references: [id])
+  userId    String
+  room      ChatRoom   @relation(fields: [roomId], references: [id])
+  roomId    String
+  reactions Reaction[]
+}
+
+model Reaction {
+  id        String   @id @default(cuid())
+  type      String   // 'like' or 'dislike'
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  message   Message  @relation(fields: [messageId], references: [id])
+  messageId String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, messageId])
+}
