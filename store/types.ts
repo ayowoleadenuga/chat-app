@@ -1,5 +1,4 @@
-// src/store/types.ts
-import type { User, Room, Message } from "@/types/chat";
+import type { User, Message } from "@/types/chat";
 import type { ApiMessage } from "@/types/api";
 
 export interface AuthState {

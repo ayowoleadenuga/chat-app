@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { router, protectedProcedure } from "../trpc";
 import { TRPCError } from "@trpc/server";
-import { observable } from "@trpc/server/observable";
 import { Prisma } from "@prisma/client";
 import { EventEmitter } from "events";
 

@@ -1,4 +1,3 @@
-// src/hooks/use-auth.ts
 import { useCallback, useState, useEffect } from "react";
 import { trpc } from "@/utils/trpc";
 import { useStore } from "@/store/hooks";
@@ -25,7 +24,6 @@ export function useAuth() {
     retryDelay: 1000,
   });
 
-  // Verify auth token and load user data
   const verifyAuth = useCallback(async () => {
     const token = localStorage.getItem("authToken");
 
@@ -58,7 +56,6 @@ export function useAuth() {
     }
   }, [refetchUser, setUser, clearStore, isInitialized]);
 
-  // Initial auth verification
   useEffect(() => {
     if (!isInitialized) {
       verifyAuth();
@@ -91,7 +88,6 @@ export function useAuth() {
           description: `Signed in as ${result.username}`,
         });
 
-        // Reset initialization state to trigger verification
         setIsInitialized(false);
 
         return result;
@@ -119,7 +115,6 @@ export function useAuth() {
     try {
       setIsLoading(true);
 
-      // Clear auth state and token
       clearStore();
       localStorage.removeItem("authToken");
       window.dispatchEvent(
@@ -130,7 +125,6 @@ export function useAuth() {
         })
       );
 
-      // Invalidate queries
       await utils.invalidate();
 
       toast({

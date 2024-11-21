@@ -1,4 +1,3 @@
-// src/utils/chat.ts
 import type {
   Reaction,
   Message,
@@ -62,7 +61,6 @@ export function transformMessageResponse(response: MessageResponse): Message {
   };
 }
 
-// Helper to format reaction data
 export function formatReactionsForResponse(
   reactions: Reaction[]
 ): MessageResponse["reactions"] {
@@ -74,7 +72,6 @@ export function formatReactionsForResponse(
   };
 }
 
-// Helper to transform Message to MessageResponse
 export function transformMessageToResponse(message: Message): MessageResponse {
   return {
     id: message.id,
@@ -97,7 +94,7 @@ export function createMessage(
   user: User
 ): Message {
   return {
-    id: crypto.randomUUID(), // Or your ID generation method
+    id: crypto.randomUUID(),
     content,
     userId: user.id,
     roomId,
@@ -126,6 +123,7 @@ export function transformRoomResponse(response: RoomResponse): Room {
   return {
     id: response.id,
     name: response.name,
+    isJoined: response.isJoined,
     createdAt: response.createdAt,
     _count: response._count,
   };

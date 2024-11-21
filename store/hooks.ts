@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { useAuthStore } from "./auth-store";
 import { useChatStore } from "./chat-store";
-import type { Message } from "@/types/chat";
 
 export function useStore() {
   const {

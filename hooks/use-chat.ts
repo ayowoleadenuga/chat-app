@@ -1,11 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useStore } from "@/store/hooks";
 import { trpc } from "@/utils/trpc";
 import { useToast } from "@/hooks/use-toast";
-import { ApiMessage, ApiRoom } from "@/types/api";
+import { ApiRoom } from "@/types/api";
 import { transformRoom } from "@/utils/transformers";
 
-// src/hooks/use-chat.ts
 export function useChat() {
   const {
     user,
@@ -14,7 +13,6 @@ export function useChat() {
     activeRoomId,
     addMessage,
     updateMessage,
-    setMessages,
     joinRoom,
     leaveRoom,
     setChatError,

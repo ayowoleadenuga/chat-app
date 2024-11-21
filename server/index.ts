@@ -3,16 +3,16 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// Only start WebSocket server in development
 if (process.env.NODE_ENV !== "production") {
   const WS_PORT = parseInt(process.env.WS_PORT || "3001", 10);
 
   try {
     const wss = createWSServer(WS_PORT);
+    // eslint-disable-next-line no-console
     console.log(`🚀 WebSocket Server started on port ${WS_PORT}`);
 
-    // Handle server shutdown
     const shutdown = () => {
+      // eslint-disable-next-line no-console
       console.log("Shutting down WebSocket server...");
       wss.close(() => {
         console.log("WebSocket server closed");
@@ -20,7 +20,6 @@ if (process.env.NODE_ENV !== "production") {
       });
     };
 
-    // Handle process termination
     process.on("SIGTERM", shutdown);
     process.on("SIGINT", shutdown);
   } catch (error) {

@@ -1,4 +1,3 @@
-// src/hooks/use-room-subscription.ts
 import { useEffect, useRef } from "react";
 import { trpc } from "@/utils/trpc";
 import { useStore } from "@/store/hooks";

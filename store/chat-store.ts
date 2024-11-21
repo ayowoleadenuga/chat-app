@@ -13,7 +13,6 @@ export const useChatStore = create<ChatState>()(
 
       setActiveRoom: (roomId) => {
         const state = get();
-        // Only update if the room ID is different and the user is a member
         if (
           roomId !== state.activeRoomId &&
           (roomId === null || state.joinedRooms.has(roomId))
